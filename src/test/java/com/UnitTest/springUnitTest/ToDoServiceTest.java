@@ -17,8 +17,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+@Configuration
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ToDoServiceTest {
 
@@ -39,6 +41,7 @@ public class ToDoServiceTest {
         toDoList.add(new ToDo(1,"Todo Sample 1",true));
         toDoList.add(new ToDo(2,"Todo Sample 2",true));
         toDoList.add(new ToDo(3,"Todo Sample 3",false));
+        //toDoList.add(new ToDo(4,"Todo Sample 4",false));
         when(toDoRepository.findAll()).thenReturn(toDoList);
 
         List<ToDo> result = toDoService.getAllToDo();
@@ -72,7 +75,7 @@ public class ToDoServiceTest {
         verify(toDoRepository, times(1)).delete(toDo);
     }
 
-   // @Spy
+    @Spy
     List<String> spiedList = new ArrayList<String>();
 
     @Test
