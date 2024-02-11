@@ -42,8 +42,8 @@ jobs:
       env:
         SECRET: ${{ secrets.Greeting }}
       run:  |
-        echo "Job 2 running on QA"
-        if [ $SECRET = "QAQAQA" ]; then echo "QA"; fi
+        echo "Job 2 running on Qa"
+        if [ $SECRET = "QaQaQa" ]; then echo "Qa"; fi
       
   job3:
     runs-on: ubuntu-latest
