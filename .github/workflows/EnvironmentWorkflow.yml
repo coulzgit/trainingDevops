@@ -5,12 +5,8 @@ name: EnvironmentWorkflow
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches:
-      - main
-      - 'features/**'
-      - 'issues/**'
-      - 'issue/**'
+  #push:
+  #  branches: [ main ]
   #pull_request:
   #  branches: [ main ]
 
@@ -46,8 +42,8 @@ jobs:
       env:
         SECRET: ${{ secrets.Greeting }}
       run:  |
-        echo "Job 2 running on Qa"
-        if [ $SECRET = "QaQaQa" ]; then echo "Qa"; fi
+        echo "Job 2 running on QA"
+        if [ $SECRET = "QaQaQa" ]; then echo "QA"; fi
       
   job3:
     runs-on: ubuntu-latest
