@@ -27,13 +27,16 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting1
+    - uses: actions/checkout@v2
+    - name: Build with Maven
+      run: mvn clean install
+      
+    - name: Build with Maven
       env:
         SECRET: ${{ secrets.Greeting }}
       run: |
-        echo "Job 1 running on Test"
-        if [ $SECRET = "TestTestTest" ]; then echo "Test"; fi
-      
+        mvn clean install
+        
   job2:
     runs-on: ubuntu-latest
     environment: QA
