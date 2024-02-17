@@ -46,7 +46,7 @@ jobs:
         SECRET: ${{ secrets.Greeting }}
       run: |
         mvn clean install
-      
+
   job2:
     runs-on: ubuntu-latest
     environment: QA
