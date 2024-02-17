@@ -1,6 +1,5 @@
 package com.UnitTest.springUnitTest;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -10,17 +9,18 @@ import java.util.Optional;
 import com.UnitTest.springUnitTest.domains.ToDo;
 import com.UnitTest.springUnitTest.domains.ToDoRepository;
 import com.UnitTest.springUnitTest.domains.ToDoServiceImpl;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@Configuration
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = {TestConfig.class})
+
 public class ToDoServiceTest {
 
     @Mock
@@ -29,8 +29,9 @@ public class ToDoServiceTest {
     @InjectMocks
     private ToDoServiceImpl toDoService;
 
-    @Before
-    public void setup(){
+
+    @BeforeEach
+    void setup(){
         MockitoAnnotations.initMocks(this);
     }
 
@@ -44,7 +45,7 @@ public class ToDoServiceTest {
         when(toDoRepository.findAll()).thenReturn(toDoList);
 
         List<ToDo> result = toDoService.getAllToDo();
-        assertEquals(3, result.size());
+        Assertions.assertEquals(3, result.size());
     }
 
     @Test
@@ -52,9 +53,9 @@ public class ToDoServiceTest {
         ToDo toDo = new ToDo(1,"Todo Sample 1",true);
         when(toDoRepository.findById(1L)).thenReturn(Optional.of(toDo));
         ToDo result = toDoService.getToDoById(1).get();
-        assertEquals(1, result.getId());
-        assertEquals("Todo Sample 1", result.getText());
-        assertEquals(true, result.isCompleted());
+        Assertions.assertEquals(1, result.getId());
+        Assertions.assertEquals("Todo Sample 1", result.getText());
+        Assertions.assertEquals(true, result.isCompleted());
     }
 
     @Test
@@ -62,9 +63,9 @@ public class ToDoServiceTest {
         ToDo toDo = new ToDo(8,"Todo Sample 8",true);
         when(toDoRepository.save(toDo)).thenReturn(toDo);
         ToDo result = toDoService.saveToDo(toDo);
-        assertEquals(8, result.getId());
-        assertEquals("Todo Sample 8", result.getText());
-        assertEquals(true, result.isCompleted());
+        Assertions.assertEquals(8, result.getId());
+        Assertions.assertEquals("Todo Sample 8", result.getText());
+        Assertions.assertEquals(true, result.isCompleted());
     }
 
     @Test
@@ -85,13 +86,11 @@ public class ToDoServiceTest {
         verify(spiedList).add("one");
         verify(spiedList).add("two");
 
-        assertEquals(2, spiedList.size());
+        Assertions.assertEquals(2, spiedList.size());
 
         //doReturn(100).when(spiedList).size();
         when(spiedList.size()).thenReturn(100);
-        assertEquals(100, spiedList.size());
+        Assertions.assertEquals(100, spiedList.size());
     }
-
-
 
 }
