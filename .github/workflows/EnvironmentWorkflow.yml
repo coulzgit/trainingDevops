@@ -10,8 +10,11 @@ on:
       - main
       - 'features/**'
       - 'issue/**'
-  #pull_request:
-  #  branches: [ main ]
+  pull_request:
+    branches:
+      - main
+      - 'features/**'
+      - 'issue/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,6 +38,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
+        distribution: 'adopt'
     
     # Build maven   
     - name: Build with Maven
