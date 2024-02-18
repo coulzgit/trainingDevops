@@ -29,7 +29,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checkout
+    # Checkout code
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -39,8 +39,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'adopt'
-
-    # Build maven
+    
+    # Build maven   
     - name: Build with Maven
       env:
         SECRET: ${{ secrets.Greeting }}
